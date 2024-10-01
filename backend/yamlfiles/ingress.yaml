@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: django-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+  - hosts:
+    - ashkan.umrc.ir
+    secretName: django-tls
+  rules:
+  - host: ashkan.umrc.ir
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: django-loadbalancer
+            port:
+              number: 8000

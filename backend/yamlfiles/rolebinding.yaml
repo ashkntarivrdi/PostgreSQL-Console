@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: django-rolebinding
+  namespace: django-backend
+subjects:
+- kind: ServiceAccount
+  name: django-service-account
+  namespace: django-backend
+roleRef:
+  kind: Role
+  name: django-role
+  apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django
+  namespace: django-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+      - name: django
+        image: registry.hamdocker.ir/ashkntarivrdi/my-django-app:v1.8
+        command: ["sh", "-c"]
+        args: ["python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && gunicorn postgresTest.wsgi:application --bind 0.0.0.0:8000"]
+        
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DB_NAME
+          value: "testdb"
+        - name: DB_USER
+          value: "AshkanTariverdi"
+        - name: DB_PASSWORD
+          value: "ashkan82"
+        - name: DB_HOST
+          value: "postgres.django-backend.svc.cluster.local"
+        - name: DB_PORT
+          value: "5432"
+      imagePullSecrets:
+      - name: my-registry-secret
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: django
+  name: django-loadbalancer
+  namespace: django-backend
+spec:
+  selector:
+    app: django
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8000
+    targetPort: 8000
+  type: ClusterIP
