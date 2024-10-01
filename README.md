@@ -199,7 +199,3 @@ To deploy the app on a Kubernetes cluster, use the provided configuration files.
 ## Contributing
 
 Feel free to fork this repository, make improvements, and submit a Pull Request. Contributions are always welcome!
-
-## License
-
-This project is licensed under the MIT License.
