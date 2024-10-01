@@ -1,0 +1,53 @@
+.main-container {
+    padding: 20px;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.search-bar {
+    flex: 1;
+    max-width: 300px;
+}
+
+.card-text-pending {
+    font-weight: bold;
+    font-size: 16px;
+    color: #e29b00;
+}
+
+.card-text-running {
+    font-weight: bold;
+    font-size: 16px;
+    color: #45e281;
+}
+
+.ant-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.ant-card:hover {
+    transform: scale(1.05);
+}
+
+.ant-btn-danger {
+    background-color: #ff4d4f;
+    border-color: #ff4d4f;
+    color: white;
+}
+
+.ant-btn-danger:hover {
+    background-color: #ff7875;
+    border-color: #ff7875;
+}
